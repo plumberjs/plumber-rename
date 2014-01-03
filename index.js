@@ -6,6 +6,6 @@ module.exports = function(newName) {
             return q.reject(new Error('Cannot rename multiple resources to ' + newName));
         }
 
-        return [resources[0].copy({filename: newName})];
+        return [resources[0].withFileName(newName)];
     };
 };
