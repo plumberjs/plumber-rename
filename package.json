@@ -3,11 +3,8 @@
   "version": "0.1.1",
   "description": "Filename renaming operation for Plumber pipelines",
   "main": "index",
-  "dependencies": {
-    "q": "~0.9.7"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -23,5 +20,9 @@
   "license": "GPL",
   "bugs": {
     "url": "https://github.com/theefer/plumber-rename/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.16.2",
+    "should": "~2.1.1"
   }
 }
