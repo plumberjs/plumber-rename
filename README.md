@@ -1,4 +1,4 @@
-plumber-rename
+plumber-rename [![Build Status](https://travis-ci.org/plumberjs/plumber-rename.png?branch=master)](https://travis-ci.org/plumberjs/plumber-rename)
 ==============
 
 Rename operation for [Plumber](https://github.com/plumberjs/plumber) pipelines.
