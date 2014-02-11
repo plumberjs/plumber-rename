@@ -8,6 +8,8 @@ module.exports = function(newName) {
             throw new Error('Cannot rename multiple resources to ' + newName);
         }
 
-        return [resources[0].withFileName(newName)];
+        return resources.map(function(resource) {
+            return resource.withFileName(newName);
+        });
     };
 };

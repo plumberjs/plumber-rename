@@ -47,6 +47,11 @@ describe('rename', function(){
     }).should.throw('Cannot rename multiple resources to one');
   });
 
+  it('should return no resource if no resource is passed', function(){
+    var renamedResources = rename('one')([]);
+    renamedResources.length.should.equal(0);
+  });
+
   it('should return the same resource with a new name', function(){
     var resource = createResource({path: 'path/to/file.js'});
     var renamedResources = rename('one')([resource]);
