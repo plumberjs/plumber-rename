@@ -1,6 +1,6 @@
 require('should');
 
-var runOperation = require('plumber-util-test').runOperation;
+var runAndCompleteWith = require('plumber-util-test').runAndCompleteWith;
 
 var Resource = require('plumber').Resource;
 
@@ -8,6 +8,10 @@ var rename = require('..');
 
 function createResource(params) {
   return new Resource(params);
+}
+
+function resourcesError() {
+  chai.assert(false, "error in resources observable");
 }
 
 
@@ -52,21 +56,18 @@ describe('rename', function(){
   // });
 
   it('should return no resource if no resource is passed', function(done){
-    runOperation(rename('one'), []).resources.toArray(function(renamedResources) {
+    runAndCompleteWith(rename('one'), [], function(renamedResources) {
       renamedResources.length.should.equal(0);
-      done();
-    });
+    }, resourcesError, done);
   });
 
   it('should return the same resource with a new name', function(done){
-    var resource = createResource({path: 'path/to/file.js'});
-    runOperation(rename('one'), [resource]).resources.toArray(function(renamedResources) {
-      // TODO: check other props
-      // TODO: fix extension?
+    var resource = createResource({path: 'path/to/file.js', type: 'javascript'});
+    runAndCompleteWith(rename('one'), [resource], function(renamedResources) {
+      // TODO: check other props, incl path?
+      // renamedResources[0].path().absolute().should.equal('path/to/one.js');
       renamedResources.length.should.equal(1);
-      // renamedResources[0].path().should.equal('one.js');
-      // renamedResources[0].filename().should.equal('one.js');
-      done();
-    });
+      renamedResources[0].filename().should.equal('one.js');
+    }, resourcesError, done);
   });
 });
